@@ -1,0 +1,64 @@
+package com.aleangelozi.tiptime
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.aleangelozi.tiptime.databinding.ActivityMainBinding
+import java.text.NumberFormat
+
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.calculateButton.setOnClickListener { calculateTip() }
+    }
+
+    private fun calculateTip() {
+        val stringInTextField = binding.costOfService.text.toString()
+
+        if (stringInTextField.isEmpty().not()) {
+            val cost = stringInTextField.toDouble()
+            val tipPercentage = getTipPercentage()
+            val tip = tipPercentage * cost
+            val roundUp = roundUpTheTip(tip)
+            displayTip(roundUp)
+        } else {
+
+            displayTip(0.0)
+            return
+        }
+
+    }
+
+    private fun roundUpTheTip(tip: Double): Double {
+        val roundedUpTip: Double?
+
+        return if (binding.roundUpSwitch.isChecked) {
+            roundedUpTip = kotlin.math.ceil(tip)
+            roundedUpTip
+        } else {
+            tip
+        }
+
+    }
+
+    private fun getTipPercentage(): Double {
+
+        val tipPercentage = when (binding.tipOptions.checkedRadioButtonId) {
+            R.id.option_twenty_percent -> 0.20
+            R.id.option_eighteen_percent -> 0.18
+            else -> 0.15
+        }
+
+        return tipPercentage
+    }
+
+    private fun displayTip(tip: Double) {
+        val formattedTip = NumberFormat.getCurrencyInstance().format(tip)
+        binding.tipResult.text = getString(R.string.tip_amount, formattedTip)
+    }
+}
