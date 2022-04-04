@@ -31,7 +31,6 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/cost_of_service_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal" />
@@ -39,7 +38,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
-            android:id="@+id/icon_service_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAccessibility="no"
@@ -80,7 +78,6 @@
                 android:text="@string/good_service" />
 
             <RadioButton
-                android:id="@+id/option_fifteen_percent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/okay_service" />
@@ -119,7 +116,6 @@
             app:layout_constraintTop_toBottomOf="@id/round_up_switch" />
 
         <TextView
-            android:id="@+id/tip_result"
             style="@style/Widget.TipTime.TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
